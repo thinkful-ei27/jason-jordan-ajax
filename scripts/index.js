@@ -1,4 +1,4 @@
-// First, remember to declare a global API_KEY in a new scripts/api-key.js file
+const API_KEY = 'YOUR_KEY_HERE';
 
 const store = {
   videos: []
