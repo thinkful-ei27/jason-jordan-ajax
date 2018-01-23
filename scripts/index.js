@@ -20,9 +20,11 @@ const fetchVideos = function(searchTerm, callback) {
 // TASK:
 // 1. Create a `decorateResponse` function that receives the Youtube API response
 // 2. Map through the response object's `items` array
-// 3. Return an object that only contains the keys `id`, `title`, `thumbnail` which holds the 
-// appropriate value from the API item object. You WILL have to dig into several nested properties. 
-// TEST IT! Grab an example API response and send it into the function, make sure you get back the object you want.
+// 3. Return an array of objects, where each object contains the keys `id`, `title`, 
+// `thumbnail` which each hold the appropriate values from the API item object. You 
+// WILL have to dig into several nested properties!
+// TEST IT! Grab an example API response and send it into the function - make sure
+// you get back the object you want.
 const decorateResponse = function(response) {
 
 };
