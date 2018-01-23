@@ -60,7 +60,7 @@ const render = function() {
 //   d) Invoke the `fetchVideos` function, sending in the search value
 //   e) Inside the callback, send the API response through the `decorateResponse` function
 //   f) Inside the callback, add the decorated response into your store using the `addVideosToStore` function
-//   g) Run the `render` function 
+//   g) Inside the callback, run the `render` function 
 // TEST IT!
 const handleFormSubmit = function() {
 
