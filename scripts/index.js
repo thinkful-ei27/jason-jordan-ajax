@@ -17,6 +17,7 @@ const store = {
 };
 
 // TASK: Add the Youtube Search Base URL here:
+// Documentation is here: https://developers.google.com/youtube/v3/docs/search/list#usage
 const BASE_URL = '';
 
 // TASK:
@@ -31,9 +32,11 @@ const fetchVideos = function(searchTerm, callback) {
 // TASK:
 // 1. Create a `decorateResponse` function that receives the Youtube API response
 // 2. Map through the response object's `items` array
-// 3. Return an object that only contains the keys `id`, `title`, `thumbnail` which holds the 
-// appropriate value from the API item object. You WILL have to dig into several nested properties. 
-// TEST IT! Grab an example API response and send it into the function, make sure you get back the object you want.
+// 3. Return an array of objects, where each object contains the keys `id`, `title`, 
+// `thumbnail` which each hold the appropriate values from the API item object. You 
+// WILL have to dig into several nested properties!
+// TEST IT! Grab an example API response and send it into the function - make sure
+// you get back the object you want.
 const decorateResponse = function(response) {
 
 };
@@ -72,7 +75,7 @@ const render = function() {
 //   d) Invoke the `fetchVideos` function, sending in the search value
 //   e) Inside the callback, send the API response through the `decorateResponse` function
 //   f) Inside the callback, add the decorated response into your store using the `addVideosToStore` function
-//   g) Run the `render` function 
+//   g) Inside the callback, run the `render` function 
 // TEST IT!
 const handleFormSubmit = function() {
 
