@@ -16,7 +16,7 @@ const store = {
   videos: []
 };
 
-// TASK: Add the Youtube Search Base URL here:
+// TASK: Add the Youtube Search API Base URL here:
 // Documentation is here: https://developers.google.com/youtube/v3/docs/search/list#usage
 const BASE_URL = '';
 
