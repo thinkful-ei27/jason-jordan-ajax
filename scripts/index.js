@@ -51,7 +51,7 @@ const generateVideoItemHtml = function(video) {
 
 // TASK:
 // 1. Create a `addVideosToStore` function that receives an array of decorated video 
-// objects and sets the array as the value held in store.items
+// objects and sets the array as the value held in store.videos
 // TEST IT!
 const addVideosToStore = function(videos) {
 
