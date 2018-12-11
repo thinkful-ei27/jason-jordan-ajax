@@ -1,4 +1,4 @@
-const API_KEY = 'AIzaSyBh_jGZJKP6SGKnecjOxsDemfwv9wCqE3o';
+const API_KEY = 'AIzaSyAuD_JlyrZ6quDVxvm0m0bsYAv7Jbmf2Tw';
 
 /*
   We want our store to hold an array of "decorated" video objects - i.e. objects that
@@ -36,17 +36,18 @@ const BASE_URL = 'https://www.googleapis.com/youtube/v3/search';
 //
 // TEST IT! Execute this function and console log the results inside the callback.
 const fetchVideos = function(searchTerm, callback) {
-    const query = {
+     console.log('fetchVideos ran');
+     const query = {
       'maxResults': '5',
       'part': 'snippet',
       'q': `${searchTerm}`, 
       'type':'',
       'key':`${API_KEY}`
     }
-    $.getJSON(BASE_URL, query, callback);
+   
+    let response = $.getJSON(BASE_URL, query, callback);
   };
 
-  console.log(fetchVideos());
 
 /**
  * @function decorateResponse
@@ -64,8 +65,12 @@ const fetchVideos = function(searchTerm, callback) {
 // TEST IT! Grab an example API response and send it into the function - make sure
 // you get back the object you want.
 const decorateResponse = function(response) {
-
+ console.log('decorateResponse ran');
+ console.log(response);
 };
+
+
+fetchVideos("ice cream", decorateResponse);
 
 /**
  * @function generateVideoItemHtml
