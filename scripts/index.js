@@ -1,4 +1,4 @@
-const API_KEY = 'AIzaSyAuD_JlyrZ6quDVxvm0m0bsYAv7Jbmf2Tw';
+const API_KEY = "AIzaSyAuD_JlyrZ6quDVxvm0m0bsYAv7Jbmf2Tw";
 
 /*
   We want our store to hold an array of "decorated" video objects - i.e. objects that
@@ -14,12 +14,12 @@ const API_KEY = 'AIzaSyAuD_JlyrZ6quDVxvm0m0bsYAv7Jbmf2Tw';
   }
 */
 const store = {
-  videos: []
+	videos: []
 };
 
 // TASK: Add the Youtube Search API Base URL here: 
 // Documentation is here: https://developers.google.com/youtube/v3/docs/search/list#usage
-const BASE_URL = 'https://www.googleapis.com/youtube/v3/search';
+const BASE_URL = "https://www.googleapis.com/youtube/v3/search";
 
 /**
  * @function fetchVideos
@@ -36,19 +36,16 @@ const BASE_URL = 'https://www.googleapis.com/youtube/v3/search';
 //
 // TEST IT! Execute this function and console log the results inside the callback.
 const fetchVideos = function(searchTerm, callback) {
-     console.log('fetchVideos ran');
-     const query = {
-      'maxResults': '5',
-      'part': 'snippet',
-      'q': `${searchTerm}`, 
-      'type':'',
-      'key':`${API_KEY}`
-    }
-   
-    let response = $.getJSON(BASE_URL, query, callback);
-  };
-
-
+	console.log("fetchVideos ran");
+	const query = {
+		"maxResults": "5",
+		"part": "snippet",
+		"q": `${searchTerm}`, 
+		"type":"",
+		"key":`${API_KEY}`
+	};
+	$.getJSON(BASE_URL, query, callback);
+};
 /**
  * @function decorateResponse
  * Uses Youtube API response to create an array of "decorated" video objects as 
@@ -64,13 +61,22 @@ const fetchVideos = function(searchTerm, callback) {
 //
 // TEST IT! Grab an example API response and send it into the function - make sure
 // you get back the object you want.
+
 const decorateResponse = function(response) {
- console.log('decorateResponse ran');
- console.log(response);
+	console.log("decorateResponse ran");
+	return response.items.map((item) => {
+		return {
+			id: item.id.videoId,
+			thumbnail: item.snippet.thumbnails.default.url,
+			name: item.snippet.title
+		};
+	});
 };
 
-
-fetchVideos("ice cream", decorateResponse);
+fetchVideos("ice cream", function(response) {
+	console.log(response);
+	const decoratedResults = decorateResponse(response);
+});
 
 /**
  * @function generateVideoItemHtml
@@ -81,9 +87,16 @@ fetchVideos("ice cream", decorateResponse);
 // TASK:
 // 1. Using the decorated object, return an HTML string containing all the expected
 // TEST IT!
-const generateVideoItemHtml = function(video) {
 
+const generateVideoItemHtml = function(video) {
+  
+	return `<li data-video-id="${video.id}>
+          <img src="${video.thumbnal}"/>
+          <h3>${video.title}</h3>
+          </li>`;
 };
+
+console.log(generateVideoItemHtml(decoratedResults));
 
 /**
  * @function addVideosToStore
@@ -94,10 +107,9 @@ const generateVideoItemHtml = function(video) {
 // 1. Set the received array as the value held in store.videos
 // TEST IT!
 const addVideosToStore = function(videos) {
-
-};
-
-
+	store.videos = videos;
+}; 
+console.log(store);
 /**
  * @function render
  * Responsible for scanning store and rendering the video list to DOM
@@ -132,6 +144,6 @@ const handleFormSubmit = function() {
 
 // When DOM is ready:
 $(function () {
-  // TASK:
-  // 1. Run `handleFormSubmit` to bind the event listener to the DOM
+	// TASK:
+	// 1. Run `handleFormSubmit` to bind the event listener to the DOM
 });
