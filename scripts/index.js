@@ -74,8 +74,9 @@ const decorateResponse = function(response) {
 };
 
 fetchVideos("ice cream", function(response) {
-	console.log(response);
-	const decoratedResults = decorateResponse(response);
+  const decoratedResults = decorateResponse(response);
+  addVideosToStore(decoratedResults);
+  render();
 });
 
 /**
@@ -90,13 +91,12 @@ fetchVideos("ice cream", function(response) {
 
 const generateVideoItemHtml = function(video) {
   
-	return `<li data-video-id="${video.id}>
-          <img src="${video.thumbnal}"/>
-          <h3>${video.title}</h3>
+	return `<li data-video-id="${video.id}">
+          <img src="${video.thumbnail}"/>
+          <h3>${video.name}</h3>
           </li>`;
 };
 
-console.log(generateVideoItemHtml(decoratedResults));
 
 /**
  * @function addVideosToStore
@@ -109,7 +109,7 @@ console.log(generateVideoItemHtml(decoratedResults));
 const addVideosToStore = function(videos) {
 	store.videos = videos;
 }; 
-console.log(store);
+
 /**
  * @function render
  * Responsible for scanning store and rendering the video list to DOM
@@ -119,7 +119,10 @@ console.log(store);
 // 2. Add this array of DOM elements to the appropriate DOM element
 // TEST IT!
 const render = function() {
-
+  const videoHTML = store.videos.map((item) => {
+    return generateVideoItemHtml(item);
+  });
+  $('.results').html(videoHTML);
 };
 
 /**
