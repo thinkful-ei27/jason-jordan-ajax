@@ -1,4 +1,4 @@
-const API_KEY = 'YOUR_KEY_HERE';
+const API_KEY = 'AIzaSyBh_jGZJKP6SGKnecjOxsDemfwv9wCqE3o';
 
 /*
   We want our store to hold an array of "decorated" video objects - i.e. objects that
@@ -17,9 +17,9 @@ const store = {
   videos: []
 };
 
-// TASK: Add the Youtube Search API Base URL here:
+// TASK: Add the Youtube Search API Base URL here: 
 // Documentation is here: https://developers.google.com/youtube/v3/docs/search/list#usage
-const BASE_URL = '';
+const BASE_URL = 'https://www.googleapis.com/youtube/v3/search';
 
 /**
  * @function fetchVideos
@@ -36,8 +36,17 @@ const BASE_URL = '';
 //
 // TEST IT! Execute this function and console log the results inside the callback.
 const fetchVideos = function(searchTerm, callback) {
+    const query = {
+      'maxResults': '5',
+      'part': 'snippet',
+      'q': `${searchTerm}`, 
+      'type':'',
+      'key':`${API_KEY}`
+    }
+    $.getJSON(BASE_URL, query, callback);
+  };
 
-};
+  console.log(fetchVideos());
 
 /**
  * @function decorateResponse
