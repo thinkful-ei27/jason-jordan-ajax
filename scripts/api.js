@@ -51,8 +51,8 @@ const decorateResponse = function(response) {
 		return {
 			id: item.id.videoId,
 			thumbnail: item.snippet.thumbnails.default.url,
-			name: item.snippet.title
-		//	url:  
+            name: item.snippet.title,
+            channelId: item.snippet.channelId
 		};
 	});
 };
