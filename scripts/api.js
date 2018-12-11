@@ -46,11 +46,13 @@ const fetchVideos = function(searchTerm, callback) {
 
 const decorateResponse = function(response) {
 	console.log("decorateResponse ran");
+	console.log(response);
 	return response.items.map((item) => {
 		return {
 			id: item.id.videoId,
 			thumbnail: item.snippet.thumbnails.default.url,
 			name: item.snippet.title
+		//	url:  
 		};
 	});
 };

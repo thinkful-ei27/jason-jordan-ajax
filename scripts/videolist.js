@@ -11,7 +11,7 @@
 const generateVideoItemHtml = function(video) {
   
 	return `<li data-video-id="${video.id}">
-          <img src="${video.thumbnail}"/>
+          <a href="http://www.youtube.com/watch?v=${video.id}"><img src="${video.thumbnail}"/></a>
           <h3>${video.name}</h3>
           </li>`;
 };
