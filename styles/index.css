@@ -17,3 +17,7 @@ ul {
 .hidden {
     display: none;
 }
+
+#nav {
+    margin: 20px;
+}
