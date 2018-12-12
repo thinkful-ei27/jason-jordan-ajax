@@ -1,5 +1,6 @@
 const store = {
-	videos: []
+    videos: [],
+    searchTerm: ""
 };
 
 /**

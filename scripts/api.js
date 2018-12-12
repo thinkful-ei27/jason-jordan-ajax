@@ -19,11 +19,12 @@ const API_KEY = "AIzaSyAuD_JlyrZ6quDVxvm0m0bsYAv7Jbmf2Tw";
 const fetchVideos = function(searchTerm, callback) {
 	console.log("fetchVideos ran");
 	const query = {
-		"maxResults": "5",
+        "maxResults": "10",
+        "pageSize": "5",
 		"part": "snippet",
 		"q": `${searchTerm}`, 
 		"type":"",
-		"key":`${API_KEY}`
+        "key":`${API_KEY}`,
 	};
 	$.getJSON(BASE_URL, query, callback);
 };
@@ -51,9 +52,37 @@ const decorateResponse = function(response) {
 		return {
 			id: item.id.videoId,
 			thumbnail: item.snippet.thumbnails.default.url,
-            name: item.snippet.title,
-            channelId: item.snippet.channelId
+			name: item.snippet.title,
+            channelId: item.snippet.channelId,
+            
 		};
 	});
 };
 
+const fetchNextPage = function(searchTerm, nextPage, callback) {
+        console.log("fetchNext ran");
+        const query = {
+            "maxResults": "10",
+            "pageSize": "5",
+            "part": "snippet",
+            "type":"",
+            "key":`${API_KEY}`,
+            "pageToken": `${nextPage}`,
+            "q": `${searchTerm}`, 
+        };
+        $.getJSON(BASE_URL, query, callback);
+    };
+
+const fetchPrevPage = function(searchTerm, prevPage, callback) {
+    console.log("fetchNext ran");
+    const query = {
+        "maxResults": "10",
+        "pageSize": "5",
+        "part": "snippet",
+        "type":"",
+        "key":`${API_KEY}`,
+        "pageToken": `${prevPage}`,
+        "q": `${searchTerm}`, 
+    };
+    $.getJSON(BASE_URL, query, callback);
+};

@@ -26,13 +26,13 @@ const generateVideoItemHtml = function(video) {
 // 2. Add this array of DOM elements to the appropriate DOM element
 // TEST IT!
 const render = function() {
-    const videoHTML = store.videos.map((item) => {
-      return generateVideoItemHtml(item);
-    });
-    $('.results').html(videoHTML);
-  };
+	const videoHTML = store.videos.map((item) => {
+		return generateVideoItemHtml(item);
+	});
+	$(".results").html(videoHTML);
+};
 
-  /**
+/**
  * @function handleFormSubmit
  * Adds form "submit" event listener that 1) initiates API call, 2) modifies store,
  * and 3) invokes render
@@ -50,16 +50,63 @@ const render = function() {
 // TEST IT!
 
 const handleFormSubmit = function() {
-    $('form').on('submit', function () {
-      event.preventDefault();
-      const queryTarget = $('form').find('#search-term');
-      const searchTerm = queryTarget.val();
-      queryTarget.val("");
-      fetchVideos(searchTerm, function(response) {
-        const decoratedResults = decorateResponse(response);
-        addVideosToStore(decoratedResults);
-        render();
-      });
-    })
-  };
+	$("form").on("submit", function () {
+		event.preventDefault();
+		const queryTarget = $("form").find("#search-term");
+        const searchTerm = queryTarget.val();
+        store.searchTerm = searchTerm;
+		queryTarget.val("");
+		fetchVideos(searchTerm, function(response) {
+            const decoratedResults = decorateResponse(response);
+            const nextPage = response.nextPageToken;
+            $("#nextPage").val(`${nextPage}`);
+            const prevPage = response.prevPageToken;
+            $("#prevPage").val(`${prevPage}`);
+			addVideosToStore(decoratedResults);
+            render();
+            $("#nav").removeClass('hidden')
+        });
+	});
+};
 
+const handleNextSubmit = function() {
+    $("#nextPage").on("click", function() {
+        event.preventDefault();
+        console.log("nextPage was clicked")
+        const nextPage = $("#nextPage").val()
+        searchTerm = store.searchTerm;
+        fetchNextPage(searchTerm, nextPage, function(response) {
+            const decoratedResults = decorateResponse(response);
+            const nextPage = response.nextPageToken;
+            $("#nextPage").val(`${nextPage}`);
+            const prevPage = response.prevPageToken;
+            $("#prevPage").val(`${prevPage}`);
+			addVideosToStore(decoratedResults);
+            render();
+    })
+    $('body,html').animate({
+        scrollTop : 0
+    }, 500);
+})
+}
+
+const handlePrevSubmit = function() {
+    $("#prevPage").on("click", function() {
+        event.preventDefault();
+        console.log("prevPage was clicked")
+        const prevPage = $("#prevPage").val()
+        searchTerm = store.searchTerm;
+        fetchPrevPage(searchTerm, prevPage, function(response) {
+            const decoratedResults = decorateResponse(response);
+            const nextPage = response.nextPageToken;
+            $("#nextPage").val(`${nextPage}`);
+            const prevPage = response.prevPageToken;
+            $("#prevPage").val(`${prevPage}`);
+			addVideosToStore(decoratedResults);
+            render();
+    })
+    $('body,html').animate({
+        scrollTop : 0
+    }, 500);
+})
+}
